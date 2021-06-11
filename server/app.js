@@ -10,6 +10,7 @@ dotenv.config();
 
 //Import routes
 const todoRoute = require("./routes/todo");
+const authRoute = require("./routes/auth");
 
 //Middleware
 app.use(express.json());
@@ -21,12 +22,15 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
   );
+  res.header("Access-Control-Expose-Headers", "auth-token");
+
   next();
 });
 app.use(cors());
 
 //Route middleware
 app.use("/", todoRoute);
+app.use("/auth", authRoute);
 
 //Connect to db
 mongoose.connect(

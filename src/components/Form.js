@@ -1,6 +1,13 @@
 import React from "react";
 import axios from "axios";
-const Form = ({ todos, setTodos, inputText, setInputText, setStatus }) => {
+const Form = ({
+  todos,
+  setTodos,
+  inputText,
+  setInputText,
+  setStatus,
+  authToken,
+}) => {
   const inputTextHandler = (e) => {
     //console.log(e.target.value);
     setInputText(e.target.value);
@@ -14,6 +21,11 @@ const Form = ({ todos, setTodos, inputText, setInputText, setStatus }) => {
       {
         text: inputText,
         completed: false,
+      },
+      {
+        headers: {
+          "auth-token": authToken,
+        },
       },
       {
         crossdomain: true,

@@ -1,9 +1,13 @@
 import axios from "axios";
 import React from "react";
 
-const Todo = ({ text, todo, todos, setTodos }) => {
+const Todo = ({ text, todo, todos, setTodos, authToken }) => {
   const deleteHandler = async () => {
-    const response = await axios.delete(`/todos/${todo._id}`);
+    const response = await axios.delete(`/todos/${todo._id}`, {
+      headers: {
+        "auth-token": authToken,
+      },
+    });
 
     if (response.status === 200) {
       setTodos(todos.filter((ele) => ele._id !== todo._id));
@@ -17,9 +21,17 @@ const Todo = ({ text, todo, todos, setTodos }) => {
   };
 
   const completeHandler = async () => {
-    const response = await axios.patch(`/todos/${todo._id}`, {
-      completed: !todo.completed,
-    });
+    const response = await axios.patch(
+      `/todos/${todo._id}`,
+      {
+        completed: !todo.completed,
+      },
+      {
+        headers: {
+          "auth-token": authToken,
+        },
+      }
+    );
 
     if (response.status === 200) {
       setTodos(

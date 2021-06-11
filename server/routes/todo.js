@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const Todo = require("../models/Todo");
+const verify = require("./verifyToken");
 
-router.post("/todos", async (req, res) => {
+router.post("/todos", verify, async (req, res) => {
   const todo = new Todo({
     text: req.body.text,
     completed: req.body.completed,
+    owner: req.user._id,
   });
 
   try {
@@ -15,16 +17,16 @@ router.post("/todos", async (req, res) => {
   }
 });
 
-router.get("/todos", async (req, res) => {
+router.get("/todos", verify, async (req, res) => {
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find({ owner: req.user._id });
     res.status(200).send({ todos: todos });
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-router.patch("/todos/:todoId", async (req, res) => {
+router.patch("/todos/:todoId", verify, async (req, res) => {
   try {
     const todo = await Todo.findOne({
       _id: req.params.todoId,
@@ -44,7 +46,7 @@ router.patch("/todos/:todoId", async (req, res) => {
   }
 });
 
-router.delete("/todos/:todoId", async (req, res) => {
+router.delete("/todos/:todoId", verify, async (req, res) => {
   try {
     const removedTodo = await Todo.findByIdAndDelete(req.params.todoId);
 

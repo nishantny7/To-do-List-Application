@@ -2,7 +2,13 @@ import React from "react";
 
 //Import components
 import Todo from "./Todo";
-const TodoList = ({ todos, setTodos, filterHandler, filteredTodos }) => {
+const TodoList = ({
+  todos,
+  setTodos,
+  filterHandler,
+  filteredTodos,
+  authToken,
+}) => {
   return (
     <div className="todo-container">
       <ul className="todo-list">
@@ -13,6 +19,7 @@ const TodoList = ({ todos, setTodos, filterHandler, filteredTodos }) => {
             todo={todo}
             todos={todos}
             setTodos={setTodos}
+            authToken={authToken}
           />
         ))}
       </ul>
