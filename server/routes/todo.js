@@ -20,7 +20,7 @@ router.post("/todos", verify, async (req, res) => {
 router.get("/todos", verify, async (req, res) => {
   try {
     const todos = await Todo.find({ owner: req.user._id });
-    res.status(200).send({ todos: todos });
+    res.status(200).send({ currentUser: req.user, todos: todos });
   } catch (err) {
     res.status(500).send(err);
   }

@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login.js";
 import Front from "./components/Front"
+import Register from "./components/register/Register"
 
 function App() {
     const [authToken, setAuthToken] = useState("");
+    const [userDetails, setUserDetails] = useState({});
 
     function PrivateRoute({ children, ...rest }) {
         return (
@@ -28,13 +30,16 @@ function App() {
                         <Front />
                     </Route>
                     <PrivateRoute path="/home">
-                        <Home authToken={authToken} />
+                        <Home authToken={authToken} userDetails={userDetails} setAuthToken={setAuthToken} />
                     </PrivateRoute>
                     {/* <Route path="/login" render={props => (
                         <Login {...props} setAuthToken={setAuthToken} authToken={authToken} />
                     )} /> */}
+                    <Route exact path="/register">
+                        <Register />
+                    </Route>
                     <Route>
-                        <Login setAuthToken={setAuthToken} authToken={authToken} />
+                        <Login setAuthToken={setAuthToken} setUserDetails={setUserDetails} />
                     </Route>
 
                 </Switch>

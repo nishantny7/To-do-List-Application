@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
 
   try {
     savedUser = await user.save();
-    res.send({ user: savedUser._id });
+    res.send("Registration successful, Please login.");
   } catch (err) {
     res.status(400).send(err);
   }
@@ -49,8 +49,8 @@ router.post("/login", async (req, res) => {
 
   //Create and send token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  console.log(token);
-  res.header("auth-token", token).send("Login Succesful");
+  //console.log(token);
+  res.header("auth-token", token).send({ currentUser: user });
 });
 
 module.exports = router;

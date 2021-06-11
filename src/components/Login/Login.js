@@ -25,7 +25,8 @@ function Login(props) {
       return "";
     } else {
       const token = response.headers["auth-token"];
-      console.log(token);
+      props.setUserDetails(response.data.currentUser);
+      //console.log(response.data);
       return token;
     }
   };
@@ -40,7 +41,7 @@ function Login(props) {
     props.setAuthToken(token);
 
     if (token !== "") {
-      console.log("yes");
+      //console.log("yes");
       //return <Redirect to={state?.from || "/"} />;
       history.push("/home");
     }

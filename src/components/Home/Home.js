@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Home.css";
+import { Redirect, useLocation, useHistory } from "react-router-dom";
 
 //Import components
 import Form from "../Form";
@@ -11,7 +12,7 @@ function Home(props) {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
-  const [userDetails, setUserDetails] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     getTodosFromDB();
@@ -62,10 +63,16 @@ function Home(props) {
     //console.log(todos);
   };
 
+  const logoutHandler = (e) => {
+    props.setAuthToken("");
+    history.push("/");
+  };
+
   return (
     <div className="App">
       <header>
-        <h1>Nishant's To-Do List</h1>
+        <h1>{props.userDetails.name}'s To-Do List</h1>
+        <button onClick={logoutHandler}>Log out</button>
       </header>
       <Form
         todos={todos}
