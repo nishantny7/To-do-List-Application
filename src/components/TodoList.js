@@ -9,19 +9,37 @@ const TodoList = ({
   filteredTodos,
   authToken,
 }) => {
+  let prevDate = "";
   return (
     <div className="todo-container">
       <ul className="todo-list">
-        {filteredTodos.map((todo) => (
-          <Todo
-            key={todo._id}
-            text={todo.text}
-            todo={todo}
-            todos={todos}
-            setTodos={setTodos}
-            authToken={authToken}
-          />
-        ))}
+        {filteredTodos.map((todo) => {
+          if (prevDate === todo.createdAt.slice(0, 10)) {
+            return (
+              <Todo
+                text={todo.text}
+                todo={todo}
+                todos={todos}
+                setTodos={setTodos}
+                authToken={authToken}
+              />
+            );
+          } else {
+            prevDate = todo.createdAt.slice(0, 10);
+            return (
+              <div key={todo._id}>
+                <p>{todo.createdAt.slice(0, 10)}</p>
+                <Todo
+                  text={todo.text}
+                  todo={todo}
+                  todos={todos}
+                  setTodos={setTodos}
+                  authToken={authToken}
+                />
+              </div>
+            );
+          }
+        })}
       </ul>
     </div>
   );

@@ -12,6 +12,7 @@ function Home(props) {
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
+  const [filteredTodosDates, setFilteredTodosDates] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
