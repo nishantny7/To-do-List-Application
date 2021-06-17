@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Redirect, useHistory } from "react-router-dom";
+import "./Register.css";
 
 function Register() {
   const [registerName, setRegisterName] = useState("");
@@ -41,31 +42,34 @@ function Register() {
 
   return (
     <div className="Register">
-      <h1>Register to make your to-do list</h1>
-      <form onSubmit={submitHandler}>
-        <label>
-          <p>Name</p>
-          <input
-            type="text"
-            onChange={(e) => setRegisterName(e.target.value)}
-          />
-        </label>
-        <label>
-          <p>Email</p>
-          <input
-            type="text"
-            onChange={(e) => setRegisterEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          <p>Password</p>
-          <input
-            type="password"
-            onChange={(e) => setRegisterPassword(e.target.value)}
-          />
-        </label>
+      <h1 className="register-text">Register to make your to-do list</h1>
+      <form onSubmit={submitHandler} className="register-form">
+        <input
+          type="text"
+          onChange={(e) => setRegisterName(e.target.value)}
+          className="name"
+          align="center"
+          placeholder="Name"
+        />
+        <input
+          type="text"
+          onChange={(e) => setRegisterEmail(e.target.value)}
+          className="email"
+          align="center"
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          onChange={(e) => setRegisterPassword(e.target.value)}
+          className="password"
+          align="center"
+          placeholder="Password"
+        />
+
         <div>
-          <button type="submit">Login</button>
+          <button type="submit" className="register-button" align="center">
+            Register
+          </button>
         </div>
       </form>
     </div>

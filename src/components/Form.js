@@ -45,7 +45,7 @@ const Form = ({
   };
 
   return (
-    <form onSubmit={submitTodoHandler}>
+    <form onSubmit={submitTodoHandler} className="todo-form">
       <input
         onChange={inputTextHandler}
         type="text"

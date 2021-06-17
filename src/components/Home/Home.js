@@ -71,8 +71,10 @@ function Home(props) {
   return (
     <div className="App">
       <header>
-        <h1>{props.userDetails.name}'s To-Do List</h1>
-        <button onClick={logoutHandler}>Log out</button>
+        <button className="logout-button" onClick={logoutHandler}>
+          Log out
+        </button>
+        <h1 align="center">{props.userDetails.name}'s To-Do List</h1>
       </header>
       <Form
         todos={todos}

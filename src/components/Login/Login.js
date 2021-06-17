@@ -10,60 +10,88 @@ function Login(props) {
   const history = useHistory();
 
   const loginUser = async (credentials) => {
-    const response = await axios.post(
-      "http://localhost:8888/auth/login",
-      {
-        email: credentials.email,
-        password: credentials.password,
-      },
-      {
-        crossdomain: true,
-      }
-    );
+    const response = await axios
+      .post(
+        "http://localhost:8888/auth/login",
+        {
+          email: credentials.email,
+          password: credentials.password,
+        },
+        {
+          crossdomain: true,
+        }
+      )
+      .then((response) => {
+        const token = response.headers["auth-token"];
+        props.setUserDetails(response.data.currentUser);
+        props.setAuthToken(token);
 
-    if (response.status === 400) {
-      return "";
-    } else {
-      const token = response.headers["auth-token"];
-      props.setUserDetails(response.data.currentUser);
-      //console.log(response.data);
-      return token;
-    }
+        if (token !== "") {
+          //return <Redirect to={state?.from || "/"} />;
+          history.push("/home");
+        }
+      })
+      .catch((error) => {
+        return <div>{alert(error.response.data)}</div>;
+      });
+
+    // if (response.status === 400) {
+    //   alert(response.data);
+    // } else {
+    //   const token = response.headers["auth-token"];
+    //   props.setUserDetails(response.data.currentUser);
+    //   props.setAuthToken(token)
+
+    //   if (token !== "") {
+    //     //console.log("yes");
+    //     //return <Redirect to={state?.from || "/"} />;
+    //     history.push("/home");
+    //   }
+    //   //console.log(response.data);
+    //   return token;
+    // }
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const token = await loginUser({
+    await loginUser({
       email,
       password,
     });
 
-    props.setAuthToken(token);
+    // props.setAuthToken(token);
 
-    if (token !== "") {
-      //console.log("yes");
-      //return <Redirect to={state?.from || "/"} />;
-      history.push("/home");
-    }
+    // if (token !== "") {
+    //   //console.log("yes");
+    //   //return <Redirect to={state?.from || "/"} />;
+    //   history.push("/home");
+    // }
   };
 
   return (
     <div className="Login">
-      <h1>Login to view your to-do list</h1>
-      <form onSubmit={submitHandler}>
-        <label>
-          <p>Email</p>
-          <input type="text" onChange={(e) => setEmail(e.target.value)} />
-        </label>
-        <label>
-          <p>Password</p>
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+      <p className="login-text" align="center">
+        Login to view your to-do list
+      </p>
+      <form onSubmit={submitHandler} className="login-form">
+        <input
+          type="text"
+          onChange={(e) => setEmail(e.target.value)}
+          className="email"
+          align="center"
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          className="password"
+          align="center"
+          placeholder="Password"
+        />
         <div>
-          <button type="submit">Login</button>
+          <button type="submit" className="login-button" align="center">
+            Login
+          </button>
         </div>
       </form>
     </div>
