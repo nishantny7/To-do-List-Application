@@ -17,7 +17,7 @@ const Form = ({
     e.preventDefault();
 
     const response = await axios.post(
-      "http://localhost:8888/todos",
+      "/todos",
       {
         text: inputText,
         completed: false,

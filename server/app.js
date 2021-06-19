@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 //Create web server
 const app = express();
@@ -14,6 +15,7 @@ const authRoute = require("./routes/auth");
 
 //Middleware
 app.use(express.json());
+app.use(cookieParser());
 app.use(function (req, res, next) {
   //Enabling CORS
   res.header("Access-Control-Allow-Origin", "*");

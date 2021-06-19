@@ -12,7 +12,7 @@ function Login(props) {
   const loginUser = async (credentials) => {
     const response = await axios
       .post(
-        "http://localhost:8888/auth/login",
+        "/auth/login",
         {
           email: credentials.email,
           password: credentials.password,
@@ -23,8 +23,11 @@ function Login(props) {
       )
       .then((response) => {
         const token = response.headers["auth-token"];
-        props.setUserDetails(response.data.currentUser);
+        const userDetails = response.data.currentUser;
+        props.setUserDetails(userDetails);
         props.setAuthToken(token);
+        localStorage.setItem("token", token);
+        localStorage.setItem("user-details", JSON.stringify(userDetails));
 
         if (token !== "") {
           //return <Redirect to={state?.from || "/"} />;

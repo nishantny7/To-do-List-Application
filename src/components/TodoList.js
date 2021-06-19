@@ -17,6 +17,7 @@ const TodoList = ({
           if (prevDate === todo.createdAt.slice(0, 10)) {
             return (
               <Todo
+                key={todo._id}
                 text={todo.text}
                 todo={todo}
                 todos={todos}

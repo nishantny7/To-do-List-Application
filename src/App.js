@@ -11,8 +11,10 @@ import Front from "./components/front/Front";
 import Register from "./components/register/Register";
 
 function App() {
-  const [authToken, setAuthToken] = useState("");
-  const [userDetails, setUserDetails] = useState({});
+  const storedToken = localStorage.getItem("token");
+  const storedUserDetails = JSON.parse(localStorage.getItem("user-details"));
+  const [authToken, setAuthToken] = useState(storedToken || "");
+  const [userDetails, setUserDetails] = useState(storedUserDetails || {});
 
   function PrivateRoute({ children, ...rest }) {
     return (
