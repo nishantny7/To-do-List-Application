@@ -8,6 +8,8 @@ const TodoList = ({
   filterHandler,
   filteredTodos,
   authToken,
+  setPopUpState,
+  setPopUpInfo,
 }) => {
   let prevDate = "";
   return (
@@ -23,6 +25,9 @@ const TodoList = ({
                 todos={todos}
                 setTodos={setTodos}
                 authToken={authToken}
+                id={todo._id}
+                setPopUpState={setPopUpState}
+                setPopUpInfo={setPopUpInfo}
               />
             );
           } else {
@@ -36,6 +41,9 @@ const TodoList = ({
                   todos={todos}
                   setTodos={setTodos}
                   authToken={authToken}
+                  id={todo._id}
+                  setPopUpState={setPopUpState}
+                  setPopUpInfo={setPopUpInfo}
                 />
               </div>
             );

@@ -1,0 +1,61 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 100%;
+  max-width: 640px;
+  background-color: #fff;
+  color: black;
+}
+
+.popup-inner .cancel-btn {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9c27b0, #e040fb);
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  margin-left: 10%;
+  margin-top: 5%;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  position: absolute;
+}
+
+.popup-inner .update-btn {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9c27b0, #e040fb);
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: 5%;
+  font-family: "Ubuntu", sans-serif;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  font-size: 13px;
+}
+
+.popup-inner .text-input {
+  width: 100%;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 20px;
+  border: 1px;
+}

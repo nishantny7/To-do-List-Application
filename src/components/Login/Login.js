@@ -26,7 +26,7 @@ function Login(props) {
         const userDetails = response.data.currentUser;
         props.setUserDetails(userDetails);
         props.setAuthToken(token);
-        localStorage.setItem("token", token);
+        //localStorage.setItem("token", token);
         localStorage.setItem("user-details", JSON.stringify(userDetails));
 
         if (token !== "") {

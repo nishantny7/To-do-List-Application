@@ -27,6 +27,7 @@ router.get("/todos", verify, async (req, res) => {
 });
 
 router.patch("/todos/:todoId", verify, async (req, res) => {
+  const update = Object.keys(req.body);
   try {
     const todo = await Todo.findOne({
       _id: req.params.todoId,
@@ -36,7 +37,7 @@ router.patch("/todos/:todoId", verify, async (req, res) => {
       res.status(404).send();
     }
 
-    todo["completed"] = req.body["completed"];
+    todo[update] = req.body[update];
 
     const updatedTodo = await todo.save();
 

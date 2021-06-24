@@ -33,7 +33,7 @@ const Form = ({
     );
     //console.log(response);
     if (response.status === 400) {
-      console.log(response.data.err);
+      alert(response.data.err);
     } else {
       setTodos([...todos, response.data]);
     }

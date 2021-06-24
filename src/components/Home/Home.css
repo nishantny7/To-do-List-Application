@@ -98,7 +98,8 @@ form button:hover {
 }
 
 .trash-btn,
-.complete-btn {
+.complete-btn,
+.edit-btn {
   background: #ff6f47;
   color: white;
   border: none;
@@ -108,6 +109,10 @@ form button:hover {
 }
 .complete-btn {
   background: rgb(11, 212, 162);
+}
+.edit-btn {
+  background: white;
+  color: black;
 }
 .todo-item {
   padding: 0rem 0.5rem;

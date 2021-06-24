@@ -6,6 +6,7 @@ const {
   registerValidation,
   loginValidation,
 } = require("../controllers/validation");
+const verify = require("./verifyToken");
 
 router.post("/register", async (req, res) => {
   //Validation of credentials before user creation
@@ -64,6 +65,10 @@ router.post("/login", async (req, res) => {
 
   //console.log(token);
   //res.header("auth-token", token).send({ currentUser: user });
+});
+
+router.get("/loggedIn", verify, async (req, res) => {
+  res.status(200).send("Access Granted");
 });
 
 module.exports = router;

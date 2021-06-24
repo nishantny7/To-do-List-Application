@@ -1,7 +1,16 @@
 import axios from "axios";
 import React from "react";
 
-const Todo = ({ text, todo, todos, setTodos, authToken }) => {
+const Todo = ({
+  text,
+  todo,
+  todos,
+  setTodos,
+  authToken,
+  id,
+  setPopUpState,
+  setPopUpInfo,
+}) => {
   const deleteHandler = async () => {
     const response = await axios.delete(`/todos/${todo._id}`, {
       headers: {
@@ -51,11 +60,20 @@ const Todo = ({ text, todo, todos, setTodos, authToken }) => {
     //console.log(todos);
   };
 
+  const editHandler = async () => {
+    //console.log("Loaded", id);
+    setPopUpState(true);
+    setPopUpInfo({ _id: id, text: text });
+  };
+
   return (
     <div className="todo">
       <li className={`todo-item ${todo.completed ? "completed" : ""}`}>
         {text}
       </li>
+      <button onClick={editHandler} className="edit-btn">
+        <i className="far fa-edit"></i>
+      </button>
       <button onClick={completeHandler} className="complete-btn">
         <i className="fas fa-check"></i>
       </button>

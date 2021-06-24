@@ -6,13 +6,18 @@ import { Redirect, useLocation, useHistory } from "react-router-dom";
 //Import components
 import Form from "../Form";
 import TodoList from "../TodoList";
+import PopUp from "../popup/PopUp";
 
 function Home(props) {
   const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [filteredTodos, setFilteredTodos] = useState([]);
-  const [filteredTodosDates, setFilteredTodosDates] = useState([]);
+  const [popUpState, setPopUpState] = useState(false);
+  const [popUpInfo, setPopUpInfo] = useState({
+    _id: "",
+    text: "",
+  });
   const history = useHistory();
 
   useEffect(() => {
@@ -91,7 +96,19 @@ function Home(props) {
         filterHandler={filterHandler}
         filteredTodos={filteredTodos}
         authToken={props.authToken}
+        setPopUpState={setPopUpState}
+        setPopUpInfo={setPopUpInfo}
       />
+      <div>
+        {popUpState ? (
+          <PopUp
+            setPopUpState={setPopUpState}
+            popUpInfo={popUpInfo}
+            todos={todos}
+            setTodos={setTodos}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
